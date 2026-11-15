@@ -12,6 +12,8 @@ public class ProductsPage {
     private By cartIcon = By.className("shopping_cart_link");
     private By addBackpackButton = By.id("add-to-cart-sauce-labs-backpack");
     private By cartBadge = By.className("shopping_cart_badge");
+    private By menuButton = By.id("react-burger-menu-btn");
+    private By logoutLink = By.id("logout_sidebar_link");
 
     public ProductsPage(WebDriver driver) {
         this.driver = driver;
@@ -31,5 +33,10 @@ public class ProductsPage {
 
     public String getCartCount() {
         return driver.findElement(cartBadge).getText();
+    }
+
+    public void logout() {
+        driver.findElement(menuButton).click();
+        driver.findElement(logoutLink).click();
     }
 }

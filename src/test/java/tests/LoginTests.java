@@ -42,4 +42,12 @@ public class LoginTests extends BaseTest {
 
         Assert.assertTrue(loginPage.getErrorMessage().contains("Username is required"));
     }
+
+    @Test
+    public void logout() {
+        new LoginPage(driver).login("standard_user", "secret_sauce");
+        new ProductsPage(driver).logout();
+
+        Assert.assertTrue(driver.getCurrentUrl().equals("https://www.saucedemo.com/"));
+    }
 }
