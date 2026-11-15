@@ -2,11 +2,17 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class ProductsPage {
 
 
     private WebDriver driver;
+    private WebDriverWait wait;
+
 
     private By pageTitle = By.className("title");
     private By cartIcon = By.className("shopping_cart_link");
@@ -17,6 +23,7 @@ public class ProductsPage {
 
     public ProductsPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public String getPageTitle() {
@@ -28,7 +35,7 @@ public class ProductsPage {
     }
 
     public void openCart() {
-        driver.findElement(cartIcon).click();
+        wait.until(ExpectedConditions.elementToBeClickable(cartIcon)).click();
     }
 
     public String getCartCount() {
@@ -36,7 +43,7 @@ public class ProductsPage {
     }
 
     public void logout() {
-        driver.findElement(menuButton).click();
-        driver.findElement(logoutLink).click();
+        wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(logoutLink)).click();
     }
 }

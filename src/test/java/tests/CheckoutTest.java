@@ -10,7 +10,7 @@ import pages.ProductsPage;
 
 public class CheckoutTest extends BaseTest {
 
-    @Test
+    @Test(priority = 2)
     public void completeCheckout() {
         new LoginPage(driver).login("standard_user", "secret_sauce");
 
@@ -30,7 +30,7 @@ public class CheckoutTest extends BaseTest {
         Assert.assertEquals(checkoutPage.getConfirmationMessage(), "Thank you for your order!");
     }
 
-    @Test
+    @Test(priority=1)
     public void checkoutWithMissingDetails() {
         new LoginPage(driver).login("standard_user", "secret_sauce");
 
@@ -40,7 +40,10 @@ public class CheckoutTest extends BaseTest {
 
         new CartPage(driver).clickCheckout();
 
+
         CheckOutPage checkoutPage = new CheckOutPage(driver);
+        //checkoutPage.sleep(500);
+        //checkoutPage.isContinueuttonVisible();
         checkoutPage.clickContinue();
 
         Assert.assertTrue(checkoutPage.getErrorMessage().contains("First Name is required"));
