@@ -26,4 +26,20 @@ public class LoginTests extends BaseTest {
 
         Assert.assertTrue(loginPage.getErrorMessage().contains("do not match"));
     }
+
+    @Test
+    public void lockedOutUserLogin() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("locked_out_user", "secret_sauce");
+
+        Assert.assertTrue(loginPage.getErrorMessage().contains("locked out"));
+    }
+
+    @Test
+    public void emptyCredentialsLogin() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.clickLogin();
+
+        Assert.assertTrue(loginPage.getErrorMessage().contains("Username is required"));
+    }
 }

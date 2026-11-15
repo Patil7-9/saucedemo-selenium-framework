@@ -11,6 +11,7 @@ public class ProductsPage {
     private By pageTitle = By.className("title");
     private By cartIcon = By.className("shopping_cart_link");
     private By addBackpackButton = By.id("add-to-cart-sauce-labs-backpack");
+    private By cartBadge = By.className("shopping_cart_badge");
 
     public ProductsPage(WebDriver driver) {
         this.driver = driver;
@@ -26,5 +27,9 @@ public class ProductsPage {
 
     public void openCart() {
         driver.findElement(cartIcon).click();
+    }
+
+    public String getCartCount() {
+        return driver.findElement(cartBadge).getText();
     }
 }
